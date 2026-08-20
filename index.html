@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#1e1e20" />
+<title>Générateur QR Code</title>
+<link rel="manifest" href="manifest.json" />
+<link rel="icon" href="icons/icon-192.png" />
+<link rel="apple-touch-icon" href="icons/icon-192.png" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="mobile-header">
+    <span class="mobile-title">QR Code<span class="accent">.</span></span>
+  </header>
+
+  <main class="app app-mobile">
+    <section class="panel controls">
+      <label class="field-label" for="mode">Type de QR code</label>
+      <select id="mode">
+        <option value="website" selected>Site web / Lien</option>
+        <option value="whatsapp">WhatsApp</option>
+        <option value="facebook">Facebook</option>
+        <option value="instagram">Instagram</option>
+        <option value="tiktok">TikTok</option>
+        <option value="youtube">YouTube</option>
+        <option value="linkedin">LinkedIn</option>
+        <option value="x">X (Twitter)</option>
+        <option value="snapchat">Snapchat</option>
+        <option value="sms">SMS</option>
+        <option value="email">Email (Gmail...)</option>
+        <option value="wifi">Wi-Fi</option>
+        <option value="vcard">Contact (vCard)</option>
+        <option value="text">Texte libre</option>
+      </select>
+
+      <div id="fields-website" class="mode-fields">
+        <label class="field-label" for="website-url">Adresse du site</label>
+        <input type="text" id="website-url" placeholder="https://monsite.com" />
+      </div>
+
+      <div id="fields-whatsapp" class="mode-fields hidden">
+        <label class="field-label" for="wa-number">Numéro WhatsApp (avec indicatif pays)</label>
+        <input type="text" id="wa-number" placeholder="2250700000000" />
+        <label class="field-label" for="wa-message">Message pré-rempli (optionnel)</label>
+        <input type="text" id="wa-message" placeholder="Bonjour, je vous contacte via..." />
+      </div>
+
+      <div id="fields-facebook" class="mode-fields hidden">
+        <label class="field-label" for="fb-username">Nom d'utilisateur ou lien</label>
+        <input type="text" id="fb-username" placeholder="nom.utilisateur ou lien complet" />
+      </div>
+
+      <div id="fields-instagram" class="mode-fields hidden">
+        <label class="field-label" for="ig-username">Nom d'utilisateur Instagram</label>
+        <input type="text" id="ig-username" placeholder="pseudo (sans @)" />
+      </div>
+
+      <div id="fields-tiktok" class="mode-fields hidden">
+        <label class="field-label" for="tt-username">Nom d'utilisateur TikTok</label>
+        <input type="text" id="tt-username" placeholder="pseudo (sans @)" />
+      </div>
+
+      <div id="fields-youtube" class="mode-fields hidden">
+        <label class="field-label" for="yt-channel">Lien ou identifiant de chaîne</label>
+        <input type="text" id="yt-channel" placeholder="@nomdechaine ou lien complet" />
+      </div>
+
+      <div id="fields-linkedin" class="mode-fields hidden">
+        <label class="field-label" for="li-username">Nom d'utilisateur ou lien du profil</label>
+        <input type="text" id="li-username" placeholder="nom-utilisateur ou lien complet" />
+      </div>
+
+      <div id="fields-x" class="mode-fields hidden">
+        <label class="field-label" for="x-username">Nom d'utilisateur X</label>
+        <input type="text" id="x-username" placeholder="pseudo (sans @)" />
+      </div>
+
+      <div id="fields-snapchat" class="mode-fields hidden">
+        <label class="field-label" for="sc-username">Nom d'utilisateur Snapchat</label>
+        <input type="text" id="sc-username" placeholder="pseudo (sans @)" />
+      </div>
+
+      <div id="fields-sms" class="mode-fields hidden">
+        <label class="field-label" for="sms-number">Numéro de téléphone</label>
+        <input type="text" id="sms-number" placeholder="+2250700000000" />
+        <label class="field-label" for="sms-message">Message pré-rempli (optionnel)</label>
+        <input type="text" id="sms-message" placeholder="Bonjour..." />
+      </div>
+
+      <div id="fields-email" class="mode-fields hidden">
+        <label class="field-label" for="em-address">Adresse email</label>
+        <input type="text" id="em-address" placeholder="nom@gmail.com" />
+        <label class="field-label" for="em-subject">Objet du message (optionnel)</label>
+        <input type="text" id="em-subject" placeholder="Objet" />
+      </div>
+
+      <div id="fields-text" class="mode-fields hidden">
+        <label class="field-label" for="content">Contenu (lien ou texte)</label>
+        <textarea id="content" rows="4" placeholder="https://exemple.com"></textarea>
+      </div>
+
+      <div id="fields-wifi" class="mode-fields hidden">
+        <label class="field-label" for="wifi-ssid">Nom du réseau (SSID)</label>
+        <input type="text" id="wifi-ssid" placeholder="MonReseauWifi" />
+        <label class="field-label" for="wifi-password">Mot de passe</label>
+        <input type="text" id="wifi-password" placeholder="motdepasse123" />
+        <div class="row">
+          <div class="field">
+            <label class="field-label" for="wifi-enc">Sécurité</label>
+            <select id="wifi-enc">
+              <option value="WPA" selected>WPA / WPA2</option>
+              <option value="WEP">WEP</option>
+              <option value="nopass">Aucune</option>
+            </select>
+          </div>
+          <div class="field">
+            <label class="field-label" for="wifi-hidden">Réseau masqué ?</label>
+            <select id="wifi-hidden">
+              <option value="false" selected>Non</option>
+              <option value="true">Oui</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div id="fields-vcard" class="mode-fields hidden">
+        <label class="field-label" for="vc-name">Nom complet</label>
+        <input type="text" id="vc-name" placeholder="Nom Prénom" />
+        <div class="row">
+          <div class="field">
+            <label class="field-label" for="vc-phone">Téléphone</label>
+            <input type="text" id="vc-phone" placeholder="+225 07 00 00 00 00" />
+          </div>
+          <div class="field">
+            <label class="field-label" for="vc-email">Email</label>
+            <input type="text" id="vc-email" placeholder="nom@exemple.com" />
+          </div>
+        </div>
+        <label class="field-label" for="vc-org">Entreprise (optionnel)</label>
+        <input type="text" id="vc-org" placeholder="NICANOR OS" />
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label class="field-label" for="size">Taille</label>
+          <input type="range" id="size" min="150" max="600" step="10" value="320" />
+          <span id="size-val" class="field-value">320 px</span>
+        </div>
+        <div class="field">
+          <label class="field-label" for="ecc">Correction d'erreur</label>
+          <select id="ecc">
+            <option value="L">Faible (L)</option>
+            <option value="M" selected>Moyenne (M)</option>
+            <option value="Q">Élevée (Q)</option>
+            <option value="H">Maximale (H)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label class="field-label" for="fg">Couleur QR</label>
+          <input type="color" id="fg" value="#f5f5f7" />
+        </div>
+        <div class="field">
+          <label class="field-label" for="bg">Couleur fond</label>
+          <input type="color" id="bg" value="#1e1e20" />
+        </div>
+        <div class="field">
+          <label class="field-label" for="margin">Marge</label>
+          <input type="range" id="margin" min="0" max="8" step="1" value="2" />
+          <span id="margin-val" class="field-value">2</span>
+        </div>
+      </div>
+
+      <label class="field-label" for="logo">Logo au centre (optionnel)</label>
+      <div class="row">
+        <div class="field">
+          <input type="file" id="logo" accept="image/png, image/jpeg" />
+        </div>
+        <button id="btn-remove-logo" class="btn btn-ghost" type="button">Retirer</button>
+      </div>
+    </section>
+
+    <section class="panel preview">
+      <div class="qr-frame">
+        <canvas id="qr-canvas"></canvas>
+      </div>
+
+      <div class="actions actions-mobile">
+        <button id="btn-download" class="btn btn-primary">Télécharger PNG</button>
+        <button id="btn-copy" class="btn btn-ghost">Copier l'image</button>
+      </div>
+      <p id="status" class="status"></p>
+
+      <div class="history-block">
+        <div class="history-header">
+          <span class="field-label" style="margin:0;">Historique</span>
+          <button id="btn-clear-history" class="link-btn">Vider</button>
+        </div>
+        <div id="history-list" class="history-list">
+          <p class="history-empty">Aucun QR code généré pour l'instant.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
