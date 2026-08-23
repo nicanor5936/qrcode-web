@@ -7,7 +7,7 @@ const FILES_TO_CACHE = [
   './manifest.json',
   './icons/icon-192.png',
   './icons/icon-512.png',
-  'https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js'
+  'https://unpkg.com/qrcode@1.5.3/build/qrcode.min.js'
 ];
 
 self.addEventListener('install', (event) => {
